@@ -9,5 +9,4 @@ export class CreateCommentDto {
   @IsString()
   userId: string;
   parentId: string | null;
-
 }
