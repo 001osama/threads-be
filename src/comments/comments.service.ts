@@ -10,6 +10,8 @@ export class CommentsService {
   constructor(
     @InjectModel(Comment.name) private commentModel: Model<Comment>,
   ) {}
+
+
   create(createCommentDto: CreateCommentDto) {
     const createdComment = this.commentModel.create({
       text: createCommentDto.text,
@@ -29,6 +31,7 @@ export class CommentsService {
     return this.commentModel
       .find({ parent: null })
       .populate(['user', 'parent'])
+      .sort({ createdAt: -1 })
       .exec();
   }
 
@@ -36,6 +39,7 @@ export class CommentsService {
     return this.commentModel
       .find({ parent: parentId })
       .populate(['user', 'parent'])
+      .sort({ createdAt: -1 })
       .exec();
   }
 
